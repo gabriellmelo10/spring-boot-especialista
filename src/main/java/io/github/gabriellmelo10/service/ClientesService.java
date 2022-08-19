@@ -1,7 +1,7 @@
 package io.github.gabriellmelo10.service;
 
-import io.github.dougllasfps.model.Cliente;
-import io.github.dougllasfps.repository.ClientesRepository;
+import io.github.gabriellmelo10.model.Cliente;
+import io.github.gabriellmelo10.repository.ClientesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
