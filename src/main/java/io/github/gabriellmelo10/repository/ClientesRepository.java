@@ -1,6 +1,6 @@
 package io.github.gabriellmelo10.repository;
 
-import io.github.dougllasfps.model.Cliente;
+import io.github.gabriellmelo10.model.Cliente;
 import org.springframework.stereotype.Repository;
 
 @Repository
