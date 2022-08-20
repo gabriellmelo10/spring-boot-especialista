@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -20,6 +21,13 @@ public class ClienteController {
 
     public ClienteController( Clientes clientes ) {
         this.clientes = clientes;
+    }
+    @GetMapping("/api/clientes")
+    @ResponseBody
+    public ResponseEntity getListaClientes() {
+        List<Cliente> listClientes = clientes.findAll();
+        return ResponseEntity.ok( listClientes );
+
     }
 
     @GetMapping("/api/clientes/{id}")
