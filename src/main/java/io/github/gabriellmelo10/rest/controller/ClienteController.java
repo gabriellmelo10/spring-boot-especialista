@@ -2,6 +2,8 @@ package io.github.gabriellmelo10.rest.controller;
 
 import io.github.gabriellmelo10.domain.entity.Cliente;
 import io.github.gabriellmelo10.domain.repository.Clientes;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,13 +23,6 @@ public class ClienteController {
 
     public ClienteController( Clientes clientes ) {
         this.clientes = clientes;
-    }
-    @GetMapping("/api/clientes")
-    @ResponseBody
-    public ResponseEntity getListaClientes() {
-        List<Cliente> listClientes = clientes.findAll();
-        return ResponseEntity.ok( listClientes );
-
     }
 
     @GetMapping("/api/clientes/{id}")
@@ -73,6 +68,19 @@ public class ClienteController {
                     clientes.save(cliente);
                     return ResponseEntity.noContent().build();
                 }).orElseGet( () -> ResponseEntity.notFound().build() );
+    }
+
+    @GetMapping("/api/clientes")
+    public ResponseEntity find( Cliente filtro ){
+        ExampleMatcher matcher = ExampleMatcher
+                                    .matching()
+                                    .withIgnoreCase()
+                                    .withStringMatcher(
+                                            ExampleMatcher.StringMatcher.CONTAINING );
+
+        Example example = Example.of(filtro, matcher);
+        List<Cliente> lista = clientes.findAll(example);
+        return ResponseEntity.ok(lista);
     }
 
 }
