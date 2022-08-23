@@ -46,7 +46,7 @@ public class ClienteController {
     public void delete( @PathVariable Integer id ){
         clientes.findById(id)
                 .map( cliente -> {
-                    clientes.delete(cliente);
+                    clientes.delete(cliente );
                     return cliente;
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
